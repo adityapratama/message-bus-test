@@ -1,0 +1,23 @@
+<h1>Home#index</h1>
+<div class='message'>...</div>
+<button id="send">Send</button>
+
+<script>
+  var i = 0;
+  MessageBus.start(); // call once at startup
+
+  // how often do you want the callback to fire in ms
+  MessageBus.callbackInterval = 500;
+  MessageBus.subscribe("/channel", function(data){
+    i++;
+    $('.message').text(data +" "+ i);
+  });
+
+  $('#send').click(function(){
+    $.ajax({url: "send_message",
+      method: 'POST'
+   }).done(function() {
+    alert("Done");	
+  });
+  });
+</script>
