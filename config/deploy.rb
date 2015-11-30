@@ -2,14 +2,14 @@
 lock '3.4.0'
 
 set :application, 'message-bus-test'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :repo_url, 'https://github.com/adityapratama/message-bus-test.git'
 
 set :branch, 'master'
 
 set :deploy_to, '/home/deployer/message-bus-test'
 
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 
@@ -20,7 +20,14 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # set :deploy_to, '/var/www/my_app_name'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
+
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.2.3'
+
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all # default value
 
 # Default value for :format is :pretty
 # set :format, :pretty
